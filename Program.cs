@@ -8,7 +8,7 @@ namespace Test
 {
     class Program
     {
-        static int index = 1;
+        static int index = 0;
         static Features ft = new Features();
         static ConsoleKeyInfo key;
         static int pos_x = 2, pos_y = 4;
@@ -26,9 +26,9 @@ namespace Test
                 switch (key.Key)
                 {
                     case ConsoleKey.DownArrow:
-                        if (index >= 4)
+                        if (index >= 5)
                         {
-                            index = 4;
+                            index = 5;
                         }
                         else
                         {
@@ -37,9 +37,9 @@ namespace Test
                         }
                         break;
                     case ConsoleKey.UpArrow:
-                        if (index <= 1)
+                        if (index <= 0)
                         {
-                            index = 1;
+                            index = 0;
                         }
                         else
                         {
@@ -49,17 +49,31 @@ namespace Test
                         break;
                     case ConsoleKey.Enter:
                         Console.Clear();
-                        if (index == 1)
+                        if (index == 0)
                         {
                             act.input();
                             Console.Clear();
                             act.title();
                         }
-                        else if (index == 2)
+                        else if(index == 1)
                         {
                             if (act.arr != null)
                             {
-                                act.sort();
+                                act.sort_increase();
+                            }
+                            else
+                            {
+                                Console.Write("YOU NEED INPUT VALUE FIRST!!! PLEASE [ESC]");
+                                Console.ReadKey();
+                            }
+                            Console.Clear();
+                            act.title();
+                        }
+                        else if(index == 2)
+                        {
+                            if (act.arr != null)
+                            {
+                                act.sort_decrease();
                             }
                             else
                             {
@@ -73,7 +87,9 @@ namespace Test
                         {
                             if (act.arr != null)
                             {
-                                act.show();
+                                act.show(act.arr_temp,0,act.amount);
+                                act.show(act.arr, 1,act.amount);
+                                Console.ReadKey();
                             }
                             else
                             {
@@ -84,6 +100,20 @@ namespace Test
                             act.title();
                         }
                         else if (index == 4)
+                        {
+                            if (act.arr != null)
+                            {
+                                act.demo();
+                            }
+                            else
+                            {
+                                Console.Write("YOU NEED INPUT VALUE FIRST!!! PLEASE [ESC]");
+                                Console.ReadKey();
+                            }
+                            Console.Clear();
+                            act.title();
+                        }
+                        else if (index == 5)
                         {
                             exit = false;
                         }
