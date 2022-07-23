@@ -12,6 +12,8 @@ namespace Test
         public int amount;
         public int[] arr;
         public int[] arr_temp;
+        public const int before = 0;
+        public const int after = 1;
         public void input()
         {
             Console.Write("PLEASE INPUT AMOUNT: ");
@@ -19,8 +21,20 @@ namespace Test
             arr = new int[amount];
             for (int i = 0; i < amount; i++)
             {
-                Console.Write($"PLEASE INPUT NUMBER {i}: ");
-                arr[i] = Int32.Parse(Console.ReadLine());
+                int x;
+                do
+                {
+                    Console.Write($"PLEASE INPUT NUMBER {i}: ");
+                    x = Int32.Parse(Console.ReadLine());
+                    if (x < 0 || x > 9)
+                    {
+                        Console.WriteLine("(0 <= value <= 9) Please input again!!");
+                    }else
+                    {
+                        break;
+                    }
+                } while (true);
+                arr[i] = x;
             }
             arr_temp = new int[amount];
             for (int i = 0; i < amount; i++)
@@ -33,9 +47,9 @@ namespace Test
         public void title()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\t WELCOME TO MY APP\n");
+            Console.WriteLine(" WELCOME TO MY APP\n");
             Console.ResetColor();
-            Console.WriteLine("PLEASE CHOSE FEATURES:\n");
+            Console.WriteLine("PLEASE CHOOSE FEATURES:\n");
         }
         private void swap(ref int x,ref int y)
         {
@@ -91,7 +105,7 @@ namespace Test
         }
         public void demo()
         {
-            show(arr_temp, 0, amount);
+            show(arr_temp);
             int i, j;
             bool haveSwap = false;
             for (i = 0; i < amount - 1; i++)
@@ -104,32 +118,37 @@ namespace Test
                         swap(ref arr[j], ref arr[j + 1]);
                         haveSwap = true;
                     }
+                    show(arr);
+                    Thread.Sleep(1000);
                 }
                 if (haveSwap = false)
                 {
                     break;
                 }
-                show(arr, 1, amount);
+                show(arr);
                 Thread.Sleep(1000);
             }
+            Console.WriteLine("SORT COMPLETE!!! PLEASE [ESC]");
             Console.ReadKey();
         }
-        public void show(int[] x, int index, int l)
+        public void show(int[] x)
         {
             int pos = 0;
-            if (index == 0)
+            if (x == arr_temp)
             {
-                pos = 1;
+                Console.SetCursorPosition(0, 0);
                 Console.Write("ARRAY BEFORE SORT: ");
+                pos = 1;
             }
-            else if (index == 1)
+            else if (x == arr)
             {
-                pos = 5;
+                Console.SetCursorPosition(0,4);
                 Console.Write("ARRAY AFTER SORT:  ");
+                pos = 5;
             }
-            for (int i = 0; i < l; i++)
+            for (int i = 0; i < amount; i++)
             {
-                if (i == (l-1))
+                if (i == (amount -1))
                 {
                     Console.WriteLine("+---+");
                 }else
@@ -139,22 +158,30 @@ namespace Test
             }
             Console.WriteLine();
             Console.SetCursorPosition(19,pos);
-            for (int i = 0; i < l; i++)
+            for (int i = 0; i < amount; i++)
             {
-                if (i == (l - 1))
+                if (i == (amount - 1))
                 {
-                    Console.Write($"| {x[i]} |");
+                    Console.Write("| ");
+                    Console.ForegroundColor= ConsoleColor.Cyan;
+                    Console.Write($"{x[i]}");
+                    Console.ResetColor();
+                    Console.Write(" |");
                 }
                 else
                 {
-                    Console.Write($"| {x[i]} ");
+                    Console.Write("| ");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write($"{x[i]}");
+                    Console.ResetColor();
+                    Console.Write(" ");
                 }
             }
             Console.WriteLine("");
             Console.SetCursorPosition(19, (pos+1));
-            for (int i = 0; i < l; i++)
+            for (int i = 0; i < amount; i++)
             {
-                if (i == (l - 1))
+                if (i == (amount - 1))
                 {
                     Console.WriteLine("+---+");
                 }

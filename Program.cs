@@ -87,8 +87,8 @@ namespace Test
                         {
                             if (act.arr != null)
                             {
-                                act.show(act.arr_temp,0,act.amount);
-                                act.show(act.arr, 1,act.amount);
+                                act.show(act.arr_temp);
+                                act.show(act.arr);
                                 Console.ReadKey();
                             }
                             else
