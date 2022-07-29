@@ -133,6 +133,19 @@ namespace Test
         }
         public void show(int[] x)
         {
+            ConsoleColor colorize;
+            Random rnd = new Random();
+            int r = rnd.Next(1, 5);
+            switch (r)
+            {
+                case 1: colorize = ConsoleColor.Red; break;
+                case 2: colorize = ConsoleColor.Green; break;
+                case 3: colorize = ConsoleColor.Cyan; break;
+                case 4: colorize = ConsoleColor.Yellow; break;
+                case 5: colorize = ConsoleColor.Blue; break;
+                default: colorize = ConsoleColor.Blue;
+                    break;
+            }
             int pos = 0;
             if (x == arr_temp)
             {
@@ -163,7 +176,7 @@ namespace Test
                 if (i == (amount - 1))
                 {
                     Console.Write("| ");
-                    Console.ForegroundColor= ConsoleColor.Cyan;
+                    Console.ForegroundColor= colorize;
                     Console.Write($"{x[i]}");
                     Console.ResetColor();
                     Console.Write(" |");
@@ -171,7 +184,7 @@ namespace Test
                 else
                 {
                     Console.Write("| ");
-                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.ForegroundColor = colorize;
                     Console.Write($"{x[i]}");
                     Console.ResetColor();
                     Console.Write(" ");
